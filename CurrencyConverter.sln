@@ -3,7 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter", "CurrencyConverter\CurrencyConverter.csproj", "{9907EA8A-E1DD-47DA-A3B3-827A0A79C3F9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{6015E4EF-ED48-4604-B5D3-1BD953DC675F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{CB3754FF-E4A3-4E17-9AF7-4A691D0B2AD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Service", "3 - Service", "{5F8AE147-8D96-4366-BA5B-632B4DEEB23E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{073D65E4-3137-4BB2-A476-EA644E89149A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{5B093BA4-14B4-4AEC-AF86-9A7107A97113}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{F0B1E30F-23B1-4391-84A8-51116418B38F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.API", "CurrencyConverter.API\CurrencyConverter.API.csproj", "{139540A7-DF2C-4614-9386-83E808411759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Domain", "CurrencyConverter.Domain\CurrencyConverter.Domain.csproj", "{A0446256-CB7D-4D9C-9915-7957E77B91F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Service", "CurrencyConverter.Service\CurrencyConverter.Service.csproj", "{20319ECB-B087-4359-8F58-531CAAF2138C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Infra.Data", "CurrencyConverter.Infra.Data\CurrencyConverter.Infra.Data.csproj", "{213A46F6-2681-486F-9D5B-6984B0A72661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Infra.CrossCutting", "CurrencyConverter.Infra.CrossCutting\CurrencyConverter.Infra.CrossCutting.csproj", "{EDD05EFB-E9D5-45D7-BB9D-5CDF2B7BE598}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +31,38 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9907EA8A-E1DD-47DA-A3B3-827A0A79C3F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9907EA8A-E1DD-47DA-A3B3-827A0A79C3F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9907EA8A-E1DD-47DA-A3B3-827A0A79C3F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9907EA8A-E1DD-47DA-A3B3-827A0A79C3F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139540A7-DF2C-4614-9386-83E808411759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139540A7-DF2C-4614-9386-83E808411759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139540A7-DF2C-4614-9386-83E808411759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139540A7-DF2C-4614-9386-83E808411759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0446256-CB7D-4D9C-9915-7957E77B91F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0446256-CB7D-4D9C-9915-7957E77B91F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0446256-CB7D-4D9C-9915-7957E77B91F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0446256-CB7D-4D9C-9915-7957E77B91F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20319ECB-B087-4359-8F58-531CAAF2138C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20319ECB-B087-4359-8F58-531CAAF2138C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20319ECB-B087-4359-8F58-531CAAF2138C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20319ECB-B087-4359-8F58-531CAAF2138C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213A46F6-2681-486F-9D5B-6984B0A72661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213A46F6-2681-486F-9D5B-6984B0A72661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213A46F6-2681-486F-9D5B-6984B0A72661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213A46F6-2681-486F-9D5B-6984B0A72661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD05EFB-E9D5-45D7-BB9D-5CDF2B7BE598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD05EFB-E9D5-45D7-BB9D-5CDF2B7BE598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD05EFB-E9D5-45D7-BB9D-5CDF2B7BE598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD05EFB-E9D5-45D7-BB9D-5CDF2B7BE598}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B093BA4-14B4-4AEC-AF86-9A7107A97113} = {073D65E4-3137-4BB2-A476-EA644E89149A}
+		{F0B1E30F-23B1-4391-84A8-51116418B38F} = {073D65E4-3137-4BB2-A476-EA644E89149A}
+		{139540A7-DF2C-4614-9386-83E808411759} = {6015E4EF-ED48-4604-B5D3-1BD953DC675F}
+		{A0446256-CB7D-4D9C-9915-7957E77B91F7} = {CB3754FF-E4A3-4E17-9AF7-4A691D0B2AD2}
+		{20319ECB-B087-4359-8F58-531CAAF2138C} = {5F8AE147-8D96-4366-BA5B-632B4DEEB23E}
+		{213A46F6-2681-486F-9D5B-6984B0A72661} = {5B093BA4-14B4-4AEC-AF86-9A7107A97113}
+		{EDD05EFB-E9D5-45D7-BB9D-5CDF2B7BE598} = {F0B1E30F-23B1-4391-84A8-51116418B38F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {185612B1-A111-4C6D-B071-EEF9EDAA5384}
