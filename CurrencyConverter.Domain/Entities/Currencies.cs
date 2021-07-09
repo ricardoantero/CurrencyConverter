@@ -10,7 +10,5 @@ namespace CurrencyConverter.Domain.Entities
 
         public string Currencycode { get; set; }
 
-        public bool Active { get; set; }
-
     }
 }

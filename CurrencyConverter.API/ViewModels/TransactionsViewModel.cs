@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CurrencyConverter.Domain.Entities
+namespace CurrencyConverter.API.ViewModels
 {
-    public class Transactions : BaseEntity
+    public class TransactionsViewModel : BaseViewModel
     {
         public int UsersId { get; set; }
         public int CurrenciesId { get; set; }
@@ -13,7 +14,7 @@ namespace CurrencyConverter.Domain.Entities
         public decimal OriginValue { get; set; }
         public decimal DestinationValue { get; set; }
 
-        public Users Users { get; set; }
-        public Currencies Currencies { get; set; }
+        public UsersViewModel Users { get; set; }
+        public CurrenciesViewModel Currencies { get; set; }
     }
 }

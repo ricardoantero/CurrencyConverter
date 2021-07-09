@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CurrencyConverter.Domain.Entities
+namespace CurrencyConverter.API.ViewModels
 {
-    public abstract class BaseEntity
+    public class CurrenciesViewModel: BaseViewModel
     {
         public virtual int Id { get; set; }
         public virtual DateTime? CreateDate { get; set; }
