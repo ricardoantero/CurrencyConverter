@@ -45,3 +45,4 @@ namespace CurrencyConverter.Service.Services
             throw new System.NotImplementedException();
         }
     }
+}

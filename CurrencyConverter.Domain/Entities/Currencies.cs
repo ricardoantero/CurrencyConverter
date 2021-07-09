@@ -8,7 +8,7 @@ namespace CurrencyConverter.Domain.Entities
     {
         public string Currency { get; set; }
 
-        public string Currencycode { get; set; }
+        public string CurrencyCode { get; set; }
 
     }
 }

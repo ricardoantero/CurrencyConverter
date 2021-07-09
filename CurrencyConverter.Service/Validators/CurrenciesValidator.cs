@@ -14,7 +14,7 @@ namespace CurrencyConverter.Service.Validators
                 .NotEmpty().WithMessage("Currency not entered.")
                 .NotNull().WithMessage("Currency not entered.");
 
-            RuleFor(c => c.Currencycode)
+            RuleFor(c => c.CurrencyCode)
                 .NotEmpty().WithMessage("Currency Code not entered.")
                 .NotNull().WithMessage("Currency Code not entered.");
         }

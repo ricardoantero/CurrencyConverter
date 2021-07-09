@@ -13,6 +13,7 @@ namespace CurrencyConverter.Domain.Entities
         public decimal OriginValue { get; set; }
         public decimal DestinationValue { get; set; }
         public decimal ConversionRate { get; set; }
+        public DateTime ConversionDate { get; set; }
 
         public Users Users { get; set; }
         public Currencies Currencies { get; set; }

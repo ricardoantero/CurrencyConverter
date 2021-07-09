@@ -8,6 +8,6 @@ namespace CurrencyConverter.Domain.ViewModels
     public class CurrenciesViewModel: BaseViewModel
     {
         public string Currency { get; set; }
-        public string Currencycode { get; set; }
+        public string CurrencyCode { get; set; }
     }
 }
