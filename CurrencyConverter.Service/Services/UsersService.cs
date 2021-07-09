@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CurrencyConverter.Domain.Entities;
 using CurrencyConverter.Domain.Interfaces;
 using CurrencyConverter.Domain.Interfaces.Services;
 using CurrencyConverter.Domain.ViewModels;
@@ -19,29 +20,43 @@ namespace CurrencyConverter.Service.Services
             _usersRepository = UsersRepository;
             _validator = validator;
         }
-        public Task Add(UsersViewModel viewModel)
+        public async Task Add(UsersViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            Logger.ForContext("data", viewModel, true).Information("Insert User");
+
+            await _validator.ValidateAndThrowAsync(viewModel);
+
+            var entity = Mapper.Map<Users>(viewModel);
+
+            await _usersRepository.Add(entity);
         }
 
         public Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return _usersRepository.Delete(id);
         }
 
-        public Task<IEnumerable<UsersViewModel>> GetAll()
+        public async Task<IEnumerable<UsersViewModel>> GetAll()
         {
-            throw new System.NotImplementedException();
+            var entities = await _usersRepository.GetAll();
+
+            return Mapper.Map<IEnumerable<UsersViewModel>>(entities);
         }
 
-        public Task<UsersViewModel> GetById(int id)
+        public async Task<UsersViewModel> GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _usersRepository.GetByIdAsync(id);
+
+            return Mapper.Map<UsersViewModel>(entity);
         }
 
-        public Task Update(UsersViewModel viewModel)
+        public async Task Update(UsersViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            await _validator.ValidateAndThrowAsync(viewModel);
+
+            var entity = Mapper.Map<Users>(viewModel);
+
+            await _usersRepository.Update(entity);
         }
     }
 }
