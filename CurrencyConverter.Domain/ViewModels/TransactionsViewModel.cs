@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CurrencyConverter.API.ViewModels
+namespace CurrencyConverter.Domain.ViewModels
 {
     public class TransactionsViewModel : BaseViewModel
     {
@@ -13,6 +13,8 @@ namespace CurrencyConverter.API.ViewModels
         public string DestinationCurrency { get; set; }
         public decimal OriginValue { get; set; }
         public decimal DestinationValue { get; set; }
+
+        public decimal ConversionRate { get; set; }
 
         public UsersViewModel Users { get; set; }
         public CurrenciesViewModel Currencies { get; set; }
