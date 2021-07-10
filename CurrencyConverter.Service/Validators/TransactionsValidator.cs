@@ -16,7 +16,8 @@ namespace CurrencyConverter.Service.Validators
 
             RuleFor(c => c.OriginCurrency)
                 .NotEmpty().WithMessage("Origin Currency not entered.")
-                .NotNull().WithMessage("Origin Currency not informada.");
+                .NotNull().WithMessage("Origin Currency not informada.")
+                .Length(1, 8).WithMessage("Field {PropertyName} must have {MinLength} between {MaxLength} characters");
 
             RuleFor(c => c.OriginValue)
                .NotEmpty().WithMessage("Origin Value not entered.")
@@ -24,7 +25,8 @@ namespace CurrencyConverter.Service.Validators
 
             RuleFor(c => c.DestinationCurrency)
                .NotEmpty().WithMessage("Destination Currency not entered.")
-               .NotNull().WithMessage("Destination Currency not informada.");
+               .NotNull().WithMessage("Destination Currency not informada.")
+               .Length(1, 8).WithMessage("Field {PropertyName} must have {MinLength} between {MaxLength} characters");
 
             RuleFor(c => c.DestinationValue)
              .NotEmpty().WithMessage("Destination Value not entered.")

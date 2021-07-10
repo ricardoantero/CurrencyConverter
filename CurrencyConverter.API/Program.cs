@@ -13,16 +13,15 @@ namespace CurrencyConverter.API
         public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
            .UseSerilog((hostingContext, loggerConfiguration) =>
-                   loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
+                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
                    .Enrich.WithCorrelationId()
                    .Enrich.FromLogContext())
-           .ConfigureWebHostDefaults(webBuilder =>
-           {
-               webBuilder.ConfigureKestrel(serverOptions =>
-               {
-                   serverOptions.AllowSynchronousIO = true;
-                }).UseStartup<Startup>();
-           });
+             .ConfigureWebHostDefaults(webBuilder =>
+             {
+                 webBuilder.UseStartup<Startup>();
+             });
+
+
     }
 
 }

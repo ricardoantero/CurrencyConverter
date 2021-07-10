@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CurrencyConverter.Domain.Entities;
 using CurrencyConverter.Domain.Interfaces;
 using CurrencyConverter.Domain.Interfaces.Services;
 using CurrencyConverter.Domain.ViewModels;
@@ -19,29 +20,43 @@ namespace CurrencyConverter.Service.Services
             _transactionsRepository = TransactionsRepository;
             _validator = validator;
         }
-        public Task Add(TransactionsViewModel viewModel)
+        public async Task Add(TransactionsViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            Logger.ForContext("data", viewModel, true).Information("Insert Transaction");
+
+            await _validator.ValidateAndThrowAsync(viewModel);
+
+            var entity = Mapper.Map<Transactions>(viewModel);
+
+            await _transactionsRepository.Add(entity);
         }
 
         public Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return _transactionsRepository.Delete(id);
         }
 
-        public Task<IEnumerable<TransactionsViewModel>> GetAll()
+        public async Task<IEnumerable<TransactionsViewModel>> GetAll()
         {
-            throw new System.NotImplementedException();
+            var entities = await _transactionsRepository.GetAll();
+
+            return Mapper.Map<IEnumerable<TransactionsViewModel>>(entities);
         }
 
-        public Task<TransactionsViewModel> GetById(int id)
+        public async Task<TransactionsViewModel> GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _transactionsRepository.GetByIdAsync(id);
+
+            return Mapper.Map<TransactionsViewModel>(entity);
         }
 
-        public Task Update(TransactionsViewModel viewModel)
+        public async Task Update(TransactionsViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            await _validator.ValidateAndThrowAsync(viewModel);
+
+            var entity = Mapper.Map<Transactions>(viewModel);
+
+            await _transactionsRepository.Update(entity);
         }
     }
 }

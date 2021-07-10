@@ -12,11 +12,13 @@ namespace CurrencyConverter.Service.Validators
         {
             RuleFor(c => c.Currency)
                 .NotEmpty().WithMessage("Currency not entered.")
-                .NotNull().WithMessage("Currency not entered.");
+                .NotNull().WithMessage("Currency not entered.")
+                .Length(1, 30).WithMessage("Field {PropertyName} must have {MinLength} between {MaxLength} characters");
 
             RuleFor(c => c.CurrencyCode)
                 .NotEmpty().WithMessage("Currency Code not entered.")
-                .NotNull().WithMessage("Currency Code not entered.");
+                .NotNull().WithMessage("Currency Code not entered.")
+                .Length(1, 8).WithMessage("Field {PropertyName} must have {MinLength} between {MaxLength} characters");
         }
     }
 }

@@ -1,5 +1,5 @@
-using CurrencyConverter.API.Configuration;
 using CurrencyConverter.Infra.Data.Context;
+using CurrencyConverter.Infra.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -37,13 +37,19 @@ namespace CurrencyConverter.API
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "API | Currency Converter",
+                    Description = "Ricardo Antero",
                     Version = "v1"
                 });
             });
 
             services.AddSingleton(Log.Logger);
 
-            services.DependencyInjection();
+            services.DependecyRegister();
+
+            services.DependecyMappers();
+
+            services.AddMvc().AddControllersAsServices();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,12 +59,15 @@ namespace CurrencyConverter.API
             {
                 app.UseDeveloperExceptionPage();
 
+               
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "APICurrencyConverter");
+                    c.SwaggerEndpoint("v1/swagger.json", "Currency Converter | API");
                 });
             }
+
+           
 
             app.UseSerilogRequestLogging();
             app.UseCors();

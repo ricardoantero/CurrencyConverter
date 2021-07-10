@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CurrencyConverter.Domain.Entities;
 using CurrencyConverter.Domain.Interfaces;
 using CurrencyConverter.Domain.Interfaces.Services;
 using CurrencyConverter.Domain.ViewModels;
@@ -20,29 +21,44 @@ namespace CurrencyConverter.Service.Services
             _validator = validator;
         }
 
-        public Task Add(CurrenciesViewModel viewModel)
+        public async Task Add(CurrenciesViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            Logger.ForContext("data", viewModel, true).Information("Insert Currency");
+
+            await _validator.ValidateAndThrowAsync(viewModel);
+
+            var entity = Mapper.Map<Currencies>(viewModel);
+
+            await _currenciesRepository.Add(entity);
         }
 
         public Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            return _currenciesRepository.Delete(id);
         }
 
-        public Task<IEnumerable<CurrenciesViewModel>> GetAll()
+        public async Task<IEnumerable<CurrenciesViewModel>> GetAll()
         {
-            throw new System.NotImplementedException();
+            var entities = await _currenciesRepository.GetAll();
+
+            return Mapper.Map<IEnumerable<CurrenciesViewModel>>(entities);
         }
 
-        public Task<CurrenciesViewModel> GetById(int id)
+        public async Task<CurrenciesViewModel> GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var entity = await _currenciesRepository.GetByIdAsync(id);
+
+            return Mapper.Map<CurrenciesViewModel>(entity);
         }
 
-        public Task Update(CurrenciesViewModel viewModel)
+        public async Task Update(CurrenciesViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            await _validator.ValidateAndThrowAsync(viewModel);
+
+            var entity = Mapper.Map<Currencies>(viewModel);
+
+            await _currenciesRepository.Update(entity);
         }
+
     }
 }

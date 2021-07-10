@@ -1,22 +1,24 @@
-﻿using CurrencyConverter.Domain.Interfaces;
+﻿using AutoMapper.Configuration;
+using CurrencyConverter.Domain.Interfaces;
 using CurrencyConverter.Domain.Interfaces.Services;
+using CurrencyConverter.Domain.ViewModels;
 using CurrencyConverter.Infra.Data.Context;
 using CurrencyConverter.Infra.Data.Repositories;
 using CurrencyConverter.Service.Services;
+using CurrencyConverter.Service.Validators;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CurrencyConverter.API.Configuration
+namespace CurrencyConverter.Infra.IoC
 {
-    public static class DependencyInjectionConfig
+    public static class Registers
     {
-        public static IServiceCollection DependencyInjection(this IServiceCollection services)
+        public static void DependecyRegister(this IServiceCollection services)
         {
+            //data
             services.AddScoped<SqlDbContext>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<ICurrenciesRepository, CurrenciesRepository>();
@@ -26,9 +28,10 @@ namespace CurrencyConverter.API.Configuration
             services.AddScoped<ICurrenciesService, CurrenciesService>();
             services.AddScoped<ITransactionsService, TransactionsService>();
 
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-
-            return services;
+            //validators
+            services.AddScoped<IValidator<UsersViewModel>, UsersValidator>();
+            services.AddScoped<IValidator<CurrenciesViewModel>, CurrenciesValidator>();
+            services.AddScoped<IValidator<TransactionsViewModel>, TransactionsValidator>();
         }
     }
 }
