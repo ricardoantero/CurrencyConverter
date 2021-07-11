@@ -23,8 +23,6 @@ namespace CurrencyConverter.Service.Services
 
         public async Task Add(CurrenciesViewModel viewModel)
         {
-            Logger.ForContext("data", viewModel, true).Information("Insert Currency");
-
             await _validator.ValidateAndThrowAsync(viewModel);
 
             var entity = Mapper.Map<Currencies>(viewModel);

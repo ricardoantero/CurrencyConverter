@@ -20,6 +20,8 @@ namespace CurrencyConverter.API.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody] TViewModel value)
         {
+            Logger.Information("log {param1}", new { Return = $"Method Post", model = value, Error = "" });
+
             await Service.Add(value);
 
             return Ok();
@@ -28,6 +30,8 @@ namespace CurrencyConverter.API.Controllers
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete(int id)
         {
+            Logger.Information("log {param1}", new { Return = $"Method Delete", id = id, Error = "" });
+
             await Service.Delete(id);
 
             return Ok();
@@ -36,6 +40,8 @@ namespace CurrencyConverter.API.Controllers
         [HttpPut]
         public virtual async Task<IActionResult> Put([FromBody] TViewModel value)
         {
+            Logger.Information("log {param1}", new { Return = $"Method Put", model = value, Error = "" });
+
             await Service.Update(value);
 
             return Ok();
@@ -44,6 +50,7 @@ namespace CurrencyConverter.API.Controllers
         [HttpGet("{id}")]
         public virtual async Task<IActionResult> Get(int id)
         {
+            Logger.Information("log {param1}", new { Return = $"Method Get", id = id, Error = "" });
             var model = await Service.GetById(id);
 
             if (model == null)
@@ -55,8 +62,7 @@ namespace CurrencyConverter.API.Controllers
         [HttpGet]
         public virtual async Task<IActionResult> Get()
         {
-            Logger.ForContext("UserName", "User").Information("log {param1}", new { Id = 1, Error = "Error" });
-
+            Logger.Information("log {param1}", new { Return = $"Method Get", Error = "" });
             var list = await Service.GetAll();
 
             return Ok(list);

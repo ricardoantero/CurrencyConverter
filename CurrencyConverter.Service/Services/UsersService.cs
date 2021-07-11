@@ -22,8 +22,6 @@ namespace CurrencyConverter.Service.Services
         }
         public async Task Add(UsersViewModel viewModel)
         {
-            Logger.ForContext("data", viewModel, true).Information("Insert User");
-
             await _validator.ValidateAndThrowAsync(viewModel);
 
             var entity = Mapper.Map<Users>(viewModel);

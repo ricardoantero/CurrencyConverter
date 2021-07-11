@@ -1,5 +1,7 @@
 using CurrencyConverter.Infra.Data.Context;
 using CurrencyConverter.Infra.IoC;
+using CurrencyConverter.Infra.IoC.Api;
+using CurrencyConverter.Infra.IoC.Api.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Linq;
 
 namespace CurrencyConverter.API
 {
@@ -25,6 +28,10 @@ namespace CurrencyConverter.API
         {
             services.AddControllers();
 
+            services.AddHttpClient();
+
+            services.BuildServiceProvider();
+
             services.AddDbContext<SqlDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -34,6 +41,7 @@ namespace CurrencyConverter.API
 
             services.AddSwaggerGen(c =>
             {
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "API | Currency Converter",
@@ -44,12 +52,13 @@ namespace CurrencyConverter.API
 
             services.AddSingleton(Log.Logger);
 
+            services.AddScoped<ExchangeRatesApi>();
+
             services.DependecyRegister();
 
             services.DependecyMappers();
 
             services.AddMvc().AddControllersAsServices();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

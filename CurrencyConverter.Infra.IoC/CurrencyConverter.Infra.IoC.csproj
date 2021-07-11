@@ -7,9 +7,13 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="RestSharp.Newtonsoft.Json" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CurrencyConverter.Domain\CurrencyConverter.Domain.csproj" />
     <ProjectReference Include="..\CurrencyConverter.Infra.Data\CurrencyConverter.Infra.Data.csproj" />
     <ProjectReference Include="..\CurrencyConverter.Service\CurrencyConverter.Service.csproj" />
   </ItemGroup>

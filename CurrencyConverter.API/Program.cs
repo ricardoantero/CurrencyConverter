@@ -8,14 +8,16 @@ namespace CurrencyConverter.API
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+               .Enrich.FromLogContext()
+               .WriteTo.Console()
+               .CreateLogger();
+
             CreateHostBuilder(args).Build().Run();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
-           .UseSerilog((hostingContext, loggerConfiguration) =>
-                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
-                   .Enrich.WithCorrelationId()
-                   .Enrich.FromLogContext())
+           .UseSerilog()
              .ConfigureWebHostDefaults(webBuilder =>
              {
                  webBuilder.UseStartup<Startup>();

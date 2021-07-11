@@ -13,11 +13,13 @@ namespace CurrencyConverter.Service.Services
     public class TransactionsService : BaseService, ITransactionsService
     {
         private readonly ITransactionsRepository _transactionsRepository;
+        private readonly IUsersRepository _usersRepository;
         private readonly IValidator<TransactionsViewModel> _validator;
 
-        public TransactionsService(ITransactionsRepository TransactionsRepository, IValidator<TransactionsViewModel> validator, IMapper mapper, ILogger logger) : base(mapper, logger)
+        public TransactionsService(ITransactionsRepository transactionsRepository, IUsersRepository usersRepository, IValidator<TransactionsViewModel> validator, IMapper mapper, ILogger logger) : base(mapper, logger)
         {
-            _transactionsRepository = TransactionsRepository;
+            _transactionsRepository = transactionsRepository;
+            _usersRepository = usersRepository;
             _validator = validator;
         }
         public async Task Add(TransactionsViewModel viewModel)

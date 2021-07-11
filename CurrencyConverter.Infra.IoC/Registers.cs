@@ -1,16 +1,14 @@
-﻿using AutoMapper.Configuration;
-using CurrencyConverter.Domain.Interfaces;
+﻿using CurrencyConverter.Domain.Interfaces;
 using CurrencyConverter.Domain.Interfaces.Services;
 using CurrencyConverter.Domain.ViewModels;
 using CurrencyConverter.Infra.Data.Context;
 using CurrencyConverter.Infra.Data.Repositories;
+using CurrencyConverter.Infra.IoC.Api;
+using CurrencyConverter.Infra.IoC.Api.Interface;
 using CurrencyConverter.Service.Services;
 using CurrencyConverter.Service.Validators;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using System;
 
 namespace CurrencyConverter.Infra.IoC
 {
@@ -32,6 +30,9 @@ namespace CurrencyConverter.Infra.IoC
             services.AddScoped<IValidator<UsersViewModel>, UsersValidator>();
             services.AddScoped<IValidator<CurrenciesViewModel>, CurrenciesValidator>();
             services.AddScoped<IValidator<TransactionsViewModel>, TransactionsValidator>();
+
+            //External
+            services.AddTransient<IExchangeRatesApi, ExchangeRatesApi>();
         }
     }
 }
