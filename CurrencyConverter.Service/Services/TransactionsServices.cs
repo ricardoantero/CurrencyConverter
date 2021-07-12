@@ -35,6 +35,11 @@ namespace CurrencyConverter.Service.Services
             await _transactionsRepository.Add(entity);
         }
 
+        public async Task<IEnumerable<TransactionsViewModel>> FindUserTransactions(int id)
+        {
+            var entities = await _transactionsRepository.FindUserTransactions(id);
+            return Mapper.Map<IEnumerable<TransactionsViewModel>>(entities);
+        }
         public Task Delete(int id)
         {
             return _transactionsRepository.Delete(id);

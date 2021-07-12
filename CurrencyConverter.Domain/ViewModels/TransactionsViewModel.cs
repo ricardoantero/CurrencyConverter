@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CurrencyConverter.Domain.ViewModels
@@ -17,10 +18,13 @@ namespace CurrencyConverter.Domain.ViewModels
         public decimal ConversionRate { get; set; }
         public DateTime ConversionDate { get; set; }
 
+        [JsonIgnore]
         public UsersViewModel Users { get; set; }
+        [JsonIgnore]
         public CurrenciesViewModel Currencies { get; set; }
-
+        [JsonIgnore]
         public TransactionsDisplayViewModel Display { get; set; }
+        [JsonIgnore]
         public TransactionsDeserializeViewModel Deserialize { get; set; }
         public TransactionsErrorViewModel Error { get; set; }
     }

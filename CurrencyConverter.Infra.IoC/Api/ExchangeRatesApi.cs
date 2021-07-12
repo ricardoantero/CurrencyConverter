@@ -20,7 +20,7 @@ namespace CurrencyConverter.Infra.IoC.Api
 
             if (returnApi != null)
             {
-                var returnJson = JsonConvert.DeserializeObject<TransactionsDeserializeViewModel>(returnApi) ;
+                var returnJson = JsonConvert.DeserializeObject<TransactionsDeserializeViewModel>(returnApi);
 
                 if (returnJson.rates != null)
                 {

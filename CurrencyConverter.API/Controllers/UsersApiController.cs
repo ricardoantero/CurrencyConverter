@@ -1,8 +1,10 @@
 ﻿using CurrencyConverter.Domain.Interfaces.Services;
 using CurrencyConverter.Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CurrencyConverter.API.Controllers
@@ -18,11 +20,13 @@ namespace CurrencyConverter.API.Controllers
         }
 
         [HttpGet("userstransaction/{id}")]
-        public async Task<ActionResult<UsersViewModel>> UsersTransaction(int id)
+        public async Task<ActionResult<TransactionsViewModel>> UsersTransaction(int id)
         {
             try
             {
-                var usersViewModel = await Service.GetById(id);
+                var usersViewModel = new UsersViewModel();
+
+                var itemUsersViewModel = await Service.GetById(id);
 
                 if (usersViewModel == null)
                 {
@@ -30,9 +34,9 @@ namespace CurrencyConverter.API.Controllers
                     return Notification(null, "User not found", false);
                 }
 
-               // _transactionsService.
+                List<TransactionsViewModel> listTransactionsViewModel = (List<TransactionsViewModel>)await _transactionsService.FindUserTransactions(id);
 
-                return Ok();
+                return Ok(listTransactionsViewModel);
             }
             catch (Exception ex)
             {

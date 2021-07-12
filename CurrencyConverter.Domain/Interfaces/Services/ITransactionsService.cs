@@ -9,6 +9,6 @@ namespace CurrencyConverter.Domain.Interfaces.Services
 {
     public interface ITransactionsService : IBaseService<TransactionsViewModel>
     {
-       
+        Task<IEnumerable<TransactionsViewModel>> FindUserTransactions(int id);
     }
 }

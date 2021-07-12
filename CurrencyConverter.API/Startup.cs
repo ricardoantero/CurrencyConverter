@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace CurrencyConverter.API
 {
@@ -26,8 +27,6 @@ namespace CurrencyConverter.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddHttpClient();
 
             services.BuildServiceProvider();
@@ -59,6 +58,9 @@ namespace CurrencyConverter.API
             services.DependecyMappers();
 
             services.AddMvc().AddControllersAsServices();
+
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
