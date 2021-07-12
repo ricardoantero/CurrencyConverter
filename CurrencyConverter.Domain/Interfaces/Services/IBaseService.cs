@@ -2,6 +2,7 @@
 using CurrencyConverter.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,6 @@ namespace CurrencyConverter.Domain.Interfaces.Services
         Task Update(TViewModel viewModel);
         Task Delete(int id);
         Task<TViewModel> GetById(int id);
-        Task<IEnumerable<TViewModel>> GetAll();
+        Task<IEnumerable<TViewModel>> GetAll(Expression<Func<TViewModel, bool>> expression = null);
     }
 }

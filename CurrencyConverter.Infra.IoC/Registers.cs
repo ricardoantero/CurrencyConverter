@@ -25,7 +25,7 @@ namespace CurrencyConverter.Infra.IoC
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ICurrenciesService, CurrenciesService>();
             services.AddScoped<ITransactionsService, TransactionsService>();
-
+          
             //validators
             services.AddScoped<IValidator<UsersViewModel>, UsersValidator>();
             services.AddScoped<IValidator<CurrenciesViewModel>, CurrenciesValidator>();

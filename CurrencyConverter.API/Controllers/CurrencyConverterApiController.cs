@@ -15,37 +15,29 @@ namespace CurrencyConverter.API.Controllers
 {
     [Route("api/currencyconverter")]
     [ApiController]
-    public class CurrencyConverterApiController : BaseAPIController<TransactionsViewModel>
+    public class CurrencyConverterApiController : ControllerBase
     {
-        private readonly ITransactionsRepository _transactionsRepository;
         private readonly ITransactionsService _transactionsService;
         private readonly IUsersService _usersService;
-        private readonly IUsersRepository _usersRepository;
         private readonly ICurrenciesService _currenciesService;
-        private readonly ICurrenciesRepository _currenciesRepository;
         private readonly IExchangeRatesApi _iexchangeratesapi;
         private readonly ILogger _logger;
-        public CurrencyConverterApiController(ITransactionsRepository transactionsRepository,
+        public CurrencyConverterApiController(
                                               ITransactionsService transactionsService,
-                                              IUsersRepository usersRepository,
                                               IUsersService usersService,
-                                              ICurrenciesRepository currenciesRepository,
                                               ICurrenciesService currenciesService,
                                               IExchangeRatesApi iexchangeratesapi,
-                                              ILogger logger) : base(transactionsService, logger)
+                                              ILogger logger)
         {
 
-            _transactionsRepository = transactionsRepository;
+
             _transactionsService = transactionsService;
-            _usersRepository = usersRepository;
             _usersService = usersService;
-            _currenciesRepository = currenciesRepository;
             _currenciesService = currenciesService;
             _iexchangeratesapi = iexchangeratesapi;
             _logger = logger;
         }
 
-        [Route("currencytransaction")]
         [HttpPost]
         public async Task<ActionResult<TransactionsViewModel>> CurrencyTransaction(int idUser,
                                                                                 string OriginCurrency,
@@ -54,30 +46,48 @@ namespace CurrencyConverter.API.Controllers
         {
             try
             {
-                var userViewModel = await _usersRepository.GetByIdAsync(idUser);
-                var currenciesViewsModel = await _currenciesRepository.GetAll(x => x.CurrencyCode == OriginCurrency);
+                var usersViewModel = await _usersService.GetById(idUser);
+                var currenciesViewsModel = await _currenciesService.FindCurrencies(OriginCurrency);
 
-                if (userViewModel == null)
+                if (usersViewModel == null)
                 {
-                    Logger.Information("log {param1}", new { Return = $"Method ConvertCurrency", Error = "User not found" });
-                    return NotFound(userViewModel);
+                    _logger.Information("log {param1}", new { Return = $"Method ConvertCurrency", Error = "User not found" });
+                    return Notification(null, "User not found", false);
                 }
 
                 if (!currenciesViewsModel.Any())
                 {
-                    Logger.Information("log {param1}", new { Return = $"Method ConvertCurrency", Error = "Currency not found" });
-                    return NotFound(currenciesViewsModel);
+                    _logger.Information("log {param1}", new { Return = $"Method ConvertCurrency", Error = "Currency not found" });
+                    return Notification(null, "Currency not found", false);
                 }
 
-                List<TransactionsViewModel> transactionsViewModel = await _iexchangeratesapi.ExchangeRates(idUser, currenciesViewsModel.FirstOrDefault().Id, OriginValue, DestinationCurrency);
+                List<TransactionsViewModel> listTransactions = await _iexchangeratesapi.ExchangeRates(idUser, currenciesViewsModel.FirstOrDefault().Id, OriginCurrency, OriginValue, DestinationCurrency);
 
-                return Ok();
+                if (!listTransactions.Any(x => x.Error != null))
+                {
+                    foreach (var item in listTransactions)
+                    {
+                         await _transactionsService.Add(item);
+                    }
+                }
+                else
+                {
+                    var error = listTransactions.FirstOrDefault().Error;
+                    return Notification(error.code, error.message, false);  
+                }
+
+                return Ok(listTransactions);
             }
             catch (Exception ex)
             {
-                Logger.Information("log {param1}", new { Return = $"Method ConvertCurrency", Error = ex.Message });
+                _logger.Information("log {param1}", new { Return = $"Method ConvertCurrency", Error = ex.Message });
                 return Problem();
             }
         }
+        protected OkObjectResult Notification(string code, string message, bool sucesss = true) => Ok(new
+        {
+            success = sucesss,
+            data = new TransactionsErrorViewModel { code = code, message = message }
+        });
     }
 }

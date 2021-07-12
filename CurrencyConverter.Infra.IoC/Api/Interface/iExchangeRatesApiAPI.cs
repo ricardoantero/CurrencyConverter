@@ -9,7 +9,8 @@ namespace CurrencyConverter.Infra.IoC.Api.Interface
     public interface IExchangeRatesApi
     {
         Task<List<TransactionsViewModel>> ExchangeRates(int idUser,
-                                        int idCurrencies,
+                                        int OriginCurrency,
+                                        string OriginCurrencies,
                                         decimal OriginValue,
                                         string[] DestinationCurrency);
     }

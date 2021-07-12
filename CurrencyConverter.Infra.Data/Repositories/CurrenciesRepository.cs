@@ -14,5 +14,10 @@ namespace CurrencyConverter.Infra.Data.Repositories
     public class CurrenciesRepository : BaseRepository<Currencies>, ICurrenciesRepository
     {
         public CurrenciesRepository(SqlDbContext context) : base(context) { }
+
+        public async Task<IEnumerable<Currencies>> FindCurrencies(string CurrencyCode)
+        {
+            return await Entities.Where(p => p.CurrencyCode == CurrencyCode).ToListAsync();
+        }
     }
 }

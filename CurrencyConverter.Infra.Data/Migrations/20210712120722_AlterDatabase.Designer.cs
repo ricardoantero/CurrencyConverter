@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CurrencyConverter.Infra.Data.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    [Migration("20210710223954_AlterDatabase")]
+    [Migration("20210712120722_AlterDatabase")]
     partial class AlterDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -5,7 +5,9 @@ using CurrencyConverter.Domain.Interfaces.Services;
 using CurrencyConverter.Domain.ViewModels;
 using FluentValidation;
 using Serilog;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace CurrencyConverter.Service.Services
@@ -35,7 +37,15 @@ namespace CurrencyConverter.Service.Services
             return _currenciesRepository.Delete(id);
         }
 
-        public async Task<IEnumerable<CurrenciesViewModel>> GetAll()
+        public async Task<IEnumerable<CurrenciesViewModel>> FindCurrencies(string CurrencyCode)
+        {
+            var entities = await _currenciesRepository.FindCurrencies(CurrencyCode);
+            return Mapper.Map<IEnumerable<CurrenciesViewModel>>(entities);
+        }
+
+       
+
+        public async Task<IEnumerable<CurrenciesViewModel>> GetAll(Expression<Func<CurrenciesViewModel, bool>> expression = null)
         {
             var entities = await _currenciesRepository.GetAll();
 
@@ -57,6 +67,9 @@ namespace CurrencyConverter.Service.Services
 
             await _currenciesRepository.Update(entity);
         }
+
+
+      
 
     }
 }

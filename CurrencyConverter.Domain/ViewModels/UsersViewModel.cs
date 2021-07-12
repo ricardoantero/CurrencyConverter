@@ -11,6 +11,13 @@ namespace CurrencyConverter.Domain.ViewModels
         public string Email { get; set; }
         public string Password { get; set; }
 
+        public UsersErrorViewModel error { get; set; }
         public IEnumerable<TransactionsViewModel> Transactions { get; set; }
+    }
+
+    public class UsersErrorViewModel
+    {
+        public string code { get; set; }
+        public string message { get; set; }
     }
 }

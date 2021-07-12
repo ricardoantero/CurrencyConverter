@@ -47,10 +47,10 @@ namespace CurrencyConverter.Infra.Data.Repositories
             return await Entities.FindAsync(id);
         }
 
-        public virtual async Task Add(TEntity entity)
+        public virtual  Task Add(TEntity entity)
         {
-            await Entities.AddAsync(entity);
-            await Context.SaveChangesAsync();
+            Entities.AddAsync(entity);
+            return Context.SaveChangesAsync();
         }
 
         public virtual Task Update(TEntity entity)
