@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - Ioc", "4.2 - Ioc", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Infra.IoC", "CurrencyConverter.Infra.IoC\CurrencyConverter.Infra.IoC.csproj", "{036E4FD2-B829-4777-8CA6-0F4BF31C902A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter.Test", "CurrencyConverter.Test\CurrencyConverter.Test.csproj", "{931779CD-DFE0-419F-9F50-8B2D4BEF285C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{036E4FD2-B829-4777-8CA6-0F4BF31C902A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{036E4FD2-B829-4777-8CA6-0F4BF31C902A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{036E4FD2-B829-4777-8CA6-0F4BF31C902A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{931779CD-DFE0-419F-9F50-8B2D4BEF285C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931779CD-DFE0-419F-9F50-8B2D4BEF285C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931779CD-DFE0-419F-9F50-8B2D4BEF285C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931779CD-DFE0-419F-9F50-8B2D4BEF285C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
