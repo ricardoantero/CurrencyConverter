@@ -26,8 +26,7 @@ namespace CurrencyConverter.Infra.Data.Repositories
         {
             var entity = await Entities.SingleOrDefaultAsync(e => e.Id == id);
 
-            entity.Active = false;
-            Context.Entry(entity).State = EntityState.Modified;
+            Context.Remove(entity);
 
             await Context.SaveChangesAsync();
         }
@@ -47,10 +46,12 @@ namespace CurrencyConverter.Infra.Data.Repositories
             return await Entities.FindAsync(id);
         }
 
-        public virtual  Task Add(TEntity entity)
+        public async Task<IEnumerable<TEntity>> Add(TEntity entity)
         {
-            Entities.AddAsync(entity);
-            return Context.SaveChangesAsync();
+            await Entities.AddAsync(entity);
+            await Context.SaveChangesAsync();
+
+            return await Entities.Where(e => e.Id == entity.Id).ToListAsync();
         }
 
         public virtual Task Update(TEntity entity)

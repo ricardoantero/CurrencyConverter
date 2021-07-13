@@ -23,13 +23,15 @@ namespace CurrencyConverter.Service.Services
             _validator = validator;
         }
 
-        public async Task Add(CurrenciesViewModel viewModel)
+        public async Task<IEnumerable<CurrenciesViewModel>> Add(CurrenciesViewModel viewModel)
         {
+            Logger.ForContext("data", viewModel, true).Information("Insert Transaction");
+
             await _validator.ValidateAndThrowAsync(viewModel);
 
             var entity = Mapper.Map<Currencies>(viewModel);
 
-            await _currenciesRepository.Add(entity);
+            return Mapper.Map<IEnumerable<CurrenciesViewModel>>(await _currenciesRepository.Add(entity));
         }
 
         public Task Delete(int id)

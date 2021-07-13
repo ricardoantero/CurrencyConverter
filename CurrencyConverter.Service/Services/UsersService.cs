@@ -22,13 +22,15 @@ namespace CurrencyConverter.Service.Services
             _usersRepository = UsersRepository;
             _validator = validator;
         }
-        public async Task Add(UsersViewModel viewModel)
+        public async Task<IEnumerable<UsersViewModel>> Add(UsersViewModel viewModel)
         {
+            Logger.ForContext("data", viewModel, true).Information("Insert Transaction");
+
             await _validator.ValidateAndThrowAsync(viewModel);
 
             var entity = Mapper.Map<Users>(viewModel);
 
-            await _usersRepository.Add(entity);
+            return Mapper.Map<IEnumerable<UsersViewModel>>(await _usersRepository.Add(entity));
         }
 
         public Task Delete(int id)

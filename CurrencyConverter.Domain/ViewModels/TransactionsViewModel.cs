@@ -22,23 +22,10 @@ namespace CurrencyConverter.Domain.ViewModels
         public UsersViewModel Users { get; set; }
         [JsonIgnore]
         public CurrenciesViewModel Currencies { get; set; }
-        [JsonIgnore]
-        public TransactionsDisplayViewModel Display { get; set; }
+
         [JsonIgnore]
         public TransactionsDeserializeViewModel Deserialize { get; set; }
         public TransactionsErrorViewModel Error { get; set; }
-    }
-
-    public class TransactionsDisplayViewModel
-    {
-        public decimal idTransaction { get; set; }
-        public int UsersId { get; set; }
-        public string OriginCurrency { get; set; }
-        public string DestinationCurrency { get; set; }
-        public decimal OriginValue { get; set; }
-        public decimal DestinationValue { get; set; }
-        public decimal ConversionRate { get; set; }
-        public DateTime ConversionDate { get; set; }
     }
     public class TransactionsDeserializeViewModel
     {

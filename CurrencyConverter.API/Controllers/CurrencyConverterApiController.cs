@@ -46,6 +46,8 @@ namespace CurrencyConverter.API.Controllers
         {
             try
             {
+                var listTransactionsDisplay = new List<TransactionsViewModel>();
+
                 var usersViewModel = await _usersService.GetById(idUser);
                 var currenciesViewsModel = await _currenciesService.FindCurrencies(OriginCurrency);
 
@@ -67,7 +69,9 @@ namespace CurrencyConverter.API.Controllers
                 {
                     foreach (var item in listTransactions)
                     {
-                         await _transactionsService.Add(item);
+                         var ret = await _transactionsService.Add(item);
+
+                        listTransactionsDisplay.Add(ret.FirstOrDefault());
                     }
                 }
                 else
@@ -76,7 +80,7 @@ namespace CurrencyConverter.API.Controllers
                     return Notification(error.code, error.message, false);  
                 }
 
-                return Ok(listTransactions);
+                return Ok(listTransactionsDisplay);
             }
             catch (Exception ex)
             {

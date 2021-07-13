@@ -10,7 +10,7 @@ namespace CurrencyConverter.Domain.Interfaces.Services
 {
     public interface IBaseService<TViewModel> where TViewModel : BaseViewModel
     {
-        Task Add(TViewModel viewModel);
+        Task<IEnumerable<TViewModel>> Add(TViewModel viewModel);
         Task Update(TViewModel viewModel);
         Task Delete(int id);
         Task<TViewModel> GetById(int id);

@@ -9,7 +9,7 @@ namespace CurrencyConverter.Domain.Interfaces
 {
     public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     {
-        Task Add(TEntity entity);
+        Task<IEnumerable<TEntity>> Add(TEntity entity);
         Task Update(TEntity entity);
         Task Delete(int id);
         Task<TEntity> GetByIdAsync(int id);

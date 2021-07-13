@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CurrencyConverter.API.Controllers
@@ -35,6 +36,12 @@ namespace CurrencyConverter.API.Controllers
                 }
 
                 List<TransactionsViewModel> listTransactionsViewModel = (List<TransactionsViewModel>)await _transactionsService.FindUserTransactions(id);
+
+                if (!listTransactionsViewModel.Any())
+                {
+                    Logger.Information("log {param1}", new { Return = $"Method UsersTransaction", Error = "Transactions not found" });
+                    return Notification(null, "Transactions not found", false);
+                }
 
                 return Ok(listTransactionsViewModel);
             }

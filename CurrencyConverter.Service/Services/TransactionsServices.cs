@@ -24,7 +24,7 @@ namespace CurrencyConverter.Service.Services
             _usersRepository = usersRepository;
             _validator = validator;
         }
-        public async Task Add(TransactionsViewModel viewModel)
+        public async Task<IEnumerable<TransactionsViewModel>> Add(TransactionsViewModel viewModel)
         {
             Logger.ForContext("data", viewModel, true).Information("Insert Transaction");
 
@@ -32,7 +32,8 @@ namespace CurrencyConverter.Service.Services
 
             var entity = Mapper.Map<Transactions>(viewModel);
 
-            await _transactionsRepository.Add(entity);
+            var x = await _transactionsRepository.Add(entity);
+            return Mapper.Map<IEnumerable<TransactionsViewModel>>(x);
         }
 
         public async Task<IEnumerable<TransactionsViewModel>> FindUserTransactions(int id)
