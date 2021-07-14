@@ -62,7 +62,9 @@ Exemplos de como se deve executar para ter um ambiente de desenvolvimento:
 
 * Utilizei o Serilog para facilitar a implementação e conseguir persistir na base de dados os Logs registrados.
 
+* Iníciei a aplicação de teste unitário xUnit sem cobertura alguma por enquanto da aplicação (íniciando os estudos em testes unitários)
 
+* Iniciei a publicação da Imagem no DockerHub - comando: "docker pull rantero/currencyconverterapi"
 ```
 
 ## 🛠️ Construído com
@@ -72,7 +74,6 @@ Exemplos de como se deve executar para ter um ambiente de desenvolvimento:
 * [SQL Server 18](https://docs.microsoft.com/pt-br/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 * [Swagger](https://swagger.io/docs/)
 * [Serilog](https://serilog.net/)
-
 
 ## 📌 Versão
 

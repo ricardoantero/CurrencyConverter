@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Esse arquivo é usado pelo processo de publicação/pacote do seu projeto Web. É possível personalizar o comportamento deste processo
+ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAR4TRqb4hY0aQTWwmqzz5iwAAAAACAAAAAAAQZgAAAAEAACAAAAAZY1tvus0OT51vfCCrmeaqtosbKVrzMYuBbO87rzKSbQAAAAAOgAAAAAIAACAAAABNsCsPtx50P7nPJpGDmtrN5AAjNiIOcQ3UzYXmpnokTBAAAADBK8PF2MolZzaAH+dtxrwNQAAAAB0biX3yRlyZ7vuFBBFmb3k/Si/SdkGCMiAX4d+vSmkUi+jBO+wWUED7uPyph6729lRwoCEga+EbKyEy5lFQ1LI=</EncryptedPassword>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=%28localdb%29\MSSQLLocalDB%3bDatabase=dbAPICurrencyConverter%3bTrusted_Connection=True%3bMultipleActiveResultSets=True%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="CurrencyConverter.Infra.Data.Context.SqlDbContext">
+      <Value>Server=%28localdb%29\MSSQLLocalDB%3bDatabase=dbAPICurrencyConverter%3bTrusted_Connection=True%3bMultipleActiveResultSets=True%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
